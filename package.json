@@ -1,0 +1,16 @@
+{
+  "name": "web-messenger",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "setup": "npm install && npm run setup:server && npm run setup:client",
+    "setup:server": "cd server && npm install",
+    "setup:client": "cd client && npm install",
+    "start:client": "npm run start --workspace=client",
+    "start:server": "npm run dev --workspace=server"
+  }
+}
