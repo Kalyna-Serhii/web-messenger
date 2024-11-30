@@ -34,7 +34,7 @@ const TokenService = {
 
   async removeToken(refreshToken) {
     const tokensSnapshot = await db
-        .collection('tokens')
+        .collection(CollectionsNames.TOKENS)
         .where('refreshToken', '==', refreshToken)
         .get();
 
@@ -45,7 +45,7 @@ const TokenService = {
 
   async findToken(refreshToken) {
     const tokensSnapshot = await db
-        .collection('tokens')
+        .collection(CollectionsNames.TOKENS)
         .where('refreshToken', '==', refreshToken)
         .get();
 
