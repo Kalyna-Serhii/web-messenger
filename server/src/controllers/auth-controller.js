@@ -6,7 +6,7 @@ const AuthController = {
       const newUser = await authService.register(req.body);
       res.cookie('accessToken', newUser.accessToken);
       res.cookie('refreshToken', newUser.refreshToken, { httpOnly: true });
-      return res.status(201).send();
+      return res.status(201).json({userId: newUser.user.id});
     } catch (error) {
       next(error);
     }
@@ -17,7 +17,7 @@ const AuthController = {
       const userData = await authService.login(req.body);
       res.cookie('accessToken', userData.accessToken);
       res.cookie('refreshToken', userData.refreshToken, { httpOnly: true });
-      return res.status(204).send();
+      return res.status(200).json({userId: userData.user.id});
     } catch (error) {
       next(error);
     }

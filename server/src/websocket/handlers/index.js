@@ -1,5 +1,7 @@
 import {getUserData} from "../auth.js";
-import MessageHandler from './message-handlers.js'
+import MessageHandlers from './message-handlers.js'
+import ChatHandlers from './chat-handlers.js'
+import UserHandlers from "./user-handlers.js";
 
 export const setupEventHandlers = (io) => {
     io.on('connection', async (socket) => {
@@ -31,10 +33,11 @@ export const setupEventHandlers = (io) => {
 
 async function handleEvent(event, messageData, userId, socket, io) {
     const eventHandlers = {
-        send_message: MessageHandler.sendMessage,
-        edit_message: MessageHandler.editMessage,
-        delete_message: MessageHandler.deleteMessage,
-        get_all_user_chats: MessageHandler.getAllUserChats,
+        send_message: MessageHandlers.sendMessage,
+        edit_message: MessageHandlers.editMessage,
+        delete_message: MessageHandlers.deleteMessage,
+        get_all_user_chats: ChatHandlers.getAllUserChats,
+        get_all_users_without_chat: UserHandlers.getUsersWithoutChat,
     };
 
     const handler = eventHandlers[event];

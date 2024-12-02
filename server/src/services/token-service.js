@@ -28,28 +28,40 @@ const TokenService = {
   },
 
   async saveToken(userId, refreshToken) {
-    const tokenRef = db.collection(CollectionsNames.TOKENS).doc(userId);
-    await tokenRef.set({ refreshToken }, { merge: true });
+    try {
+      const tokenRef = db.collection(CollectionsNames.TOKENS).doc(userId);
+      await tokenRef.set({ refreshToken }, { merge: true });
+    } catch (error) {
+      throw error;
+    }
   },
 
   async removeToken(refreshToken) {
-    const tokensSnapshot = await db
-        .collection(CollectionsNames.TOKENS)
-        .where('refreshToken', '==', refreshToken)
-        .get();
+    try {
+      const tokensSnapshot = await db
+          .collection(CollectionsNames.TOKENS)
+          .where('refreshToken', '==', refreshToken)
+          .get();
 
-    if (!tokensSnapshot.empty) {
-      await tokensSnapshot.docs[0].ref.delete();
+      if (!tokensSnapshot.empty) {
+        await tokensSnapshot.docs[0].ref.delete();
+      }
+    } catch (error) {
+      throw error;
     }
   },
 
   async findToken(refreshToken) {
-    const tokensSnapshot = await db
-        .collection(CollectionsNames.TOKENS)
-        .where('refreshToken', '==', refreshToken)
-        .get();
+    try {
+      const tokensSnapshot = await db
+          .collection(CollectionsNames.TOKENS)
+          .where('refreshToken', '==', refreshToken)
+          .get();
 
-    return tokensSnapshot.empty ? null : tokensSnapshot.docs[0].data();
+      return tokensSnapshot.empty ? null : tokensSnapshot.docs[0].data();
+    } catch (error) {
+      throw error;
+    }
   },
 };
 
