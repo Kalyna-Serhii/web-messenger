@@ -9,8 +9,6 @@ export const setupEventHandlers = (io) => {
 
         socket.userId = userData.id;
 
-        console.log(`User connected: ${socket.id}`);
-
         socket.on('message', async (data) => {
             try {
                 const userData = await getUserData(socket)
@@ -23,11 +21,6 @@ export const setupEventHandlers = (io) => {
                 console.error(`Error handling message from ${socket.id}: ${error.message}`);
             }
         })
-
-
-        socket.on('disconnect', () => {
-            console.log(`User disconnected: ${socket.id}`);
-        });
     });
 };
 
