@@ -1,0 +1,11 @@
+FROM node:20-alpine
+
+WORKDIR /usr/src/app/server
+
+COPY server/package*.json ./
+
+RUN npm install --prefix ./
+
+COPY server/ ./
+
+CMD ["sh", "-c", "npm run dev"]

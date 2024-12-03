@@ -1,0 +1,21 @@
+version: '3'
+services:
+  server:
+    build:
+      dockerfile: Dockerfile_server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    env_file:
+      - ./server/.env
+
+  client:
+    build:
+      dockerfile: Dockerfile_client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
